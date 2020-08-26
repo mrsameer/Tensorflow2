@@ -1,0 +1,60 @@
+1) suppose a neural network contains a dense layer with that connects one hidden layer hi and ni units to a following hidden layer h(i+1) with n(i+1) units. How many parameters are needed for this connection?
+Ans: (ni + 1) x n(i+1)
+
+2)Why do we use non-linear activation functions (such as tanh or relu) in neural networks?
+Ans: Without non-linear activation functions, the network would only able to model linear functions of the data. 
+
+3) Suppose that we have a 10x10 image with only one colour channel. We apply a single convolutional filter with kernel size 3x3, stride 1 and no zero padding (‘VALID’ padding), followed by a 2x2 pooling layer (with a default stride of 2 in both dimensions). What are the dimensions of the output?
+Ans: 4x4x1
+
+4) What happens to the spatial dimension of the output when you increase the stride in a convolutional layer?
+Ans: The output spatial dimension decreases
+
+5)What is the effect of using pooling layers in convolutional neural networks? Select all that apply
+Ans: i) It helps to make the model invariant to small transistions of the output. 
+
+	ii) It reduces the spatial dimensions of the layer input. 
+
+6) How many trainable parameters does a feedforward network have with input shape (64, ), 3 hidden layers with 16 units each and final linear layer with 8 units?
+Ans:model2 = Sequential([
+    Flatten(input_shape = (8,8)),
+    Dense(16, activation='relu'),
+    Dense(16, activation='relu'),
+    Dense(16, activation='relu'),
+    Dense(8, activation='sigmoid')
+	])
+	model2.summary()
+	1720
+
+7) What is the output shape of the following model (ignoring the batch size)?
+	Sequential([Conv2D(64, (4, 4), activation='tanh', input_shape=(64, 64, 3))])
+
+Ans: (61, 61, 64)
+
+8) Why are pooling layers often included in convolutional neural networks? 
+sol: i) To downgrade the spatial dimensions, thereby reducing the number of network parameters. 
+
+	ii) To allow a degree of translational invariance of the input.
+
+9)Neural networks are rarely optimised using batch gradient descent (BGD) and instead we use mini-batches from the dataset to train on (often implemented under the name Stochastic Gradient Descent, or SGD). What are the advantages of doing this?
+Ans: i) Using BGD is very slow for large datasets, as we need to iterate over the entire dataset before making a single parameter update. 
+	ii) SGD is able to jump out of local minima that would otherwise trap BGD.
+
+10) The binary cross entropy loss function is a popular choice in classification problems. Let n be the number of training examples, y the ground truth label (y is either 0 or 1) for the i-th example and y hat is the model prediction for the i-th example i.e., the probability that the correct class is y = 1. How is the binary cross entropy computed for a single instance?
+Ans: -(ylog(yhat) + (1-y)log(1-yhat))
+
+11) What is the default learning rate for Adadelta optimizer?
+Ans: 0.001
+
+12) What is the equivalent compile call for the following snippet
+	model.compile(optimizer=‘adam’, loss=‘mean_squared_error’, metrics=[‘mape’])
+
+Ans: model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999)
+loss=tf.keras.losses.MeanSquaredError()
+metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
+
+13) Suppose we are building a classification model, where there are 10 classes. The final output layer is given by Dense(10, activation='softmax'). Our dataset labels are given by a single numpy array y_train. y_train has shape (num_labels, ) and the first two labels are y[0] = 9, y[1] = 0. Which loss function should we use?
+Ans: sparse_categorical_crossentropy
+
+14) Suppose instead of y_train has shape (num_samples, 10), and the first two labels are y[0] = [0,0,0,0,0,0,0,0,0,1], y[1] = [1,0,0,0,0,0,0,0,0,0], which loss function should we use?
+Ans: categorical_crossentropy
