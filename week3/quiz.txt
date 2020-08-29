@@ -1,0 +1,32 @@
+1)What is the purpose of having a validation set for a model?
+Ans: To evaluate the generalization performance of the model, check for overfitting, and allow for hyperparamter tuning. 
+
+2) weight decay, Early stopping, Data augmentation are the examples of regularization. 
+
+3) How can early stopping improve the performance of the model?
+Ans: It can prevent overfitting on the training set, and therefore improve performance on the test set. 
+
+4) A popular method used to reduce overfitting in neural networks in the inclusion of (Bernouli) dropout layers. Given a dropout rate of 0.3 on a layer with n neurons. What is the probability that only one of the neurons is dropped out?
+Ans: n(0.3)(0.7)exp(n-1)
+
+5) How many keys will the history.history dictionary have after the following training run?
+	model.complie(
+		loss = 'binary_crossentropy',
+		metrics = ['accuracy', 'mae']
+	)
+	history = model.fit(
+		X_train,
+		y_train,
+		validation_data = (X_val, y_val)
+	)
+
+Ans: 6 and the list is ['loss', 'accuracy', 'mae', 'val_loss', 'val_accuracy', 'val_mae']
+
+6) What should p1 and p2 be to ensure a 60/20/20 training/validation/test split?
+	from sklearn.model_selection import train_test_split
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=p1)
+	model.fit(X_train, y_train, validation_split=p2)
+
+Ans: p1 = 0.2, p2 = 0.25
+	 We take 20% as the test data (p1) and then take 25% of the remaining 80% of the data (p2) for validation
+
